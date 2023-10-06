@@ -57,24 +57,28 @@ const shoppingCart = [
         let quantityTag = document.getElementById(product.name);
         product.quantity = product.quantity + 1;
         quantityTag.innerHTML = product.quantity;
+        Total()
     }
     function handleDecrement(event){
         const id = parseInt(event.target.id);  
         const product = shoppingCart.find((product) => product.id === id);
         let quantityTag = document.getElementById(product.name);
-        product.quantity = product.quantity - 1;
+        product.quantity = (product.quantity > 1) ? product.quantity - 1 : product.quantity
         quantityTag.innerHTML = product.quantity;
+        Total()
     }
 
-    function Total(event) {
-        let id = event.target.id;
-        id = parseInt(id);
-        const product = shoppingCart.find((product) => product.id === id);
-        let quantityTot = document.getElementById('totalPrice');
-        let singlequantity = (product.quantity * product.price);
-        console.log(singlequantity)
-
-
+     const Total = () => {
+        let totalTag = document.getElementById("totalPrice");
+        let totalPrice = 0;
+        //loop through product obj and get quantity/price
+        shoppingCart.forEach((product) => {
+            const price = product.price;
+            const quantity = product.quantity;
+            const productPrice = price * quantity;
+            totalPrice += productPrice
+        });
+        totalTag.innerHTML = `N${totalPrice}`   
     }
 
     function displayShoppingCart() {
@@ -170,6 +174,8 @@ const shoppingCart = [
  
       // add productContainer to shopping container
       shoppingContainer.appendChild(productContainer); 
+
+      Total()
 
     } 
 
