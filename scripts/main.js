@@ -71,7 +71,7 @@ const shoppingCart = [
         id = parseInt(id);
         const product = shoppingCart.find((product) => product.id === id);
         let quantityTot = document.getElementById('totalPrice');
-        let singlequantity = (product.quantity * product.price)
+        let singlequantity = (product.quantity * product.price);
         console.log(singlequantity)
 
 
